@@ -44,10 +44,6 @@ export default makeStyles((theme) => ({
     fontFamily: "'Qahiri', sans-serif",
     fontSize: 45,
   },
-  btnBlack: {
-    backgroundColor: "#000 !important",
-    color: "#fff",
-  },
   iconLogo: {
     fontSize: 90,
     color: "#FECC00",

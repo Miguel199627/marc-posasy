@@ -1,17 +1,21 @@
 import useStyles from "./styles";
 import logo from "../../../img/logo.png";
 
+import { login } from "../../../actions/auth";
+import { LOGIN } from '../../../constants/actionTypes';
+import { setToken } from "../../../helpers/jwt";
+
+import { Image, Form, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTags } from "@fortawesome/free-solid-svg-icons";
+
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../../actions/auth";
-import { setToken } from '../../../helpers/jwt';
 import { useHistory } from "react-router-dom";
 
 export default function Login() {
-  const post = useSelector(state => {
-    if(Object.keys(state.auths).length) handleHistory(state.auths.data);
+  useSelector(({ auths: { constant, data } }) => {
+    if(constant && constant === LOGIN) handleHistory(data.jwtToken);
   });
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -35,7 +39,7 @@ export default function Login() {
     <>
       <div className={classes.sidenav}>
         <div className={classes.loginMainText}>
-          <img src={logo} className={classes.imgLogo} />
+          <Image src={logo} className={classes.imgLogo} />
           <h1 className={classes.title}>Marcposasy</h1>
           <FontAwesomeIcon icon={faTags} className={classes.iconLogo} />
         </div>
@@ -43,10 +47,10 @@ export default function Login() {
       <div className={classes.main}>
         <div className="col-md-6 col-sm-12">
           <div className={classes.loginForm}>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <strong>Email</strong>
-                <input
+            <Form onSubmit={handleSubmit}>
+              <Form.Group>
+                <Form.Label><strong>Email</strong></Form.Label>
+                <Form.Control
                   type="text"
                   className="form-control"
                   value={dataLogin.email}
@@ -54,10 +58,10 @@ export default function Login() {
                     setDataLogin({ ...dataLogin, email: value })
                   }
                 />
-              </div>
-              <div className="form-group mt-2">
-                <strong>Password</strong>
-                <input
+              </Form.Group>
+              <Form.Group>
+                <Form.Label><strong>Password</strong></Form.Label>
+                <Form.Control
                   type="password"
                   className="form-control"
                   value={dataLogin.password}
@@ -65,14 +69,10 @@ export default function Login() {
                     setDataLogin({ ...dataLogin, password: value })
                   }
                 />
-              </div>
-              <button type="submit" className={`btn mt-2 ${classes.btnBlack}`}>
-                Login
-              </button>
-              <button type="button" className="btn mt-2 ms-2 btn-secondary">
-                Recovery
-              </button>
-            </form>
+              </Form.Group>
+              <Button type="submit" variant="dark" className="mt-2">Login</Button>
+              <Button type="button" variant="secondary" className="mt-2 ms-2">Recovery</Button>{' '}
+            </Form>
           </div>
         </div>
       </div>
