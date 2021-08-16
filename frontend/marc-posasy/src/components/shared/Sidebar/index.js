@@ -1,6 +1,6 @@
 import useStyles from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartBar, faUser, faDollyFlatbed, faBoxes, faTag } from "@fortawesome/free-solid-svg-icons";
+import { faChartBar, faUser, faDollyFlatbed, faBoxes, faTag, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
@@ -38,6 +38,12 @@ export default function Sidebar() {
                         <FontAwesomeIcon icon={faTag} className={classes.sizeIcon}/>
                         Marcas
                     </a>
+                </li>
+                <li>
+                    <Link className="nav-link link-dark" to="/sales">
+                        <FontAwesomeIcon icon={faShoppingCart} className={classes.sizeIcon}/>
+                        Ventas
+                    </Link>
                 </li>
             </ul>
         </div>
