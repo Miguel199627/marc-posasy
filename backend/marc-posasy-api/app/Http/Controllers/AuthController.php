@@ -19,10 +19,10 @@ class AuthController extends Controller
 
         if($validator->fails()) return response("Incorrect email or password", 400);
 
-        $validator = User::where('email', $req->input('email'))->first();
+        $validator = User::where('email', $req->email)->first();
         if(empty($validator)) return response("Incorrect email or password", 400);
 
-        $hash = password_verify($req->input('password'), $validator->password);
+        $hash = password_verify($req->password, $validator->password);
         if(!(boolean)$validator->status || !$hash) return response("Incorrect email or password", 400);
 
         try {

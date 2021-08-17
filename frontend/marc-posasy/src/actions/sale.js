@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE } from "../constants/actionTypes";
+import { FETCH_ALL, CREATE, UPDATE } from "../constants/actionTypes";
 import * as provider from "../providers/sale";
 
 import { toast } from "react-toastify";
@@ -17,6 +17,17 @@ export const create = (post) => async (dispatch) => {
     const { data } = await provider.create(post);
     dispatch({ type: CREATE, payload: data });
     toast.success("Sale added with success!");
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
+
+export const update = (id, post) => async (dispatch) => {
+  try {
+    post.id = id;
+    const { data } = await provider.update(post);
+    dispatch({ type: UPDATE, payload: data });
+    toast.success("Sale updated with success!");
   } catch (error) {
     toast.error(error.message);
   }

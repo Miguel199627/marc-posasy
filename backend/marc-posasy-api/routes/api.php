@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SaleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,8 @@ Route::post('/auth/login', [AuthController::class, 'login']);
 Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('/user/list', [UserController::class, 'list']);
     Route::post('/user/add', [UserController::class, 'add']);
+
+    Route::get('/sale/list', [SaleController::class, 'list']);
+    Route::post('/sale/add', [SaleController::class, 'add']);
+    Route::put('/sale/update', [SaleController::class, 'update']);
 });
