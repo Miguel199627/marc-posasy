@@ -5,18 +5,12 @@ import { ToastContainer } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 
 import SalesBoxList from "./SalesBoxList";
 
 export default function SalesBox({ onSalesBox, setCurrentId }) {
   const classes = useStyles();
   const sales = useSelector((state) => state.sales);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(false);
-  }, [sales]);
 
   return (
     <>
@@ -36,7 +30,7 @@ export default function SalesBox({ onSalesBox, setCurrentId }) {
           </div>
         </Card.Header>
         <Card.Body>
-          {loading ? (
+          {!sales.data ? (
             <Row className="justify-content-center">
               <Spinner animation="grow" variant="warning" />
             </Row>
@@ -57,6 +51,7 @@ export default function SalesBox({ onSalesBox, setCurrentId }) {
                     <th>Neto</th>
                     <th>Fecha</th>
                     <th>Creado en</th>
+                    <th>Estado</th>
                   </tr>
                 </thead>
                 <tbody>

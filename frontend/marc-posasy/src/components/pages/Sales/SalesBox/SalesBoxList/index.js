@@ -1,9 +1,13 @@
-import { Button } from "react-bootstrap";
+import { Button, Badge } from "react-bootstrap";
 import moment from "moment";
+import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { supr } from "../../../../../actions/sale";
 
 export default function SalesBoxList({ sale, setCurrentId, onSalesBoxList }) {
+  const dispatch = useDispatch();
+
   return (
     <tr className="text-center">
       <td>
@@ -19,16 +23,22 @@ export default function SalesBoxList({ sale, setCurrentId, onSalesBoxList }) {
         >
           <FontAwesomeIcon icon={faEdit} />
         </Button>
-        <Button variant="danger" size="sm" title="Delete user">
+        <Button
+          variant="danger"
+          size="sm"
+          title="Delete user"
+          onClick={() => dispatch(supr(sale.id))}
+        >
           <FontAwesomeIcon icon={faTrash} />
         </Button>
       </td>
-      <td>{sale.name_client}</td>
+      <td>{sale.name_client ? sale.name_client : 'N/A'}</td>
       <td>{sale.total}</td>
       <td>{sale.cost}</td>
-      <td>{sale.neto}</td>
+      <td>{sale.total - sale.cost}</td>
       <td>{moment(sale.date).format("DD-MM-yyyy")}</td>
       <td>{moment(sale.created_at).format("DD-MM-yyyy")}</td>
+      <td><Badge bg={ !sale.deleted_at ? 'success' : 'danger' }>{ !sale.deleted_at ? 'Activo' : 'Inactivo' }</Badge></td>
     </tr>
   );
 }

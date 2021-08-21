@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE } from "../constants/actionTypes";
+import { FETCH_ALL, CREATE, UPDATE, DELETE } from "../constants/actionTypes";
 
 export default (sales = [], action) => {
   switch (action.type) {
@@ -10,6 +10,8 @@ export default (sales = [], action) => {
       return sales.data.map((sale) =>
         sale.id === action.payload.id ? action.payload : sale
       );
+    case DELETE:
+      return action.payload;
     default:
       return sales;
   }
