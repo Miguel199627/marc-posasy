@@ -1,11 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles(() => ({
-  positionMenu: {
-    left: "-110px !important"
+  titleLogo: {
+    fontFamily: "monospace",
   },
   makeupButton: {
     borderRadius: "10px",
-    fontSize: 15
-  }
+    fontSize: 15,
+  },
+  positionMenu: {
+    left: "-110px !important",
+  },
 }));

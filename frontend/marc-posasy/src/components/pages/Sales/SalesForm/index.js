@@ -1,3 +1,4 @@
+import useStyles from "./styles";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
@@ -13,6 +14,7 @@ export default function SalesForm({
   let sale = useSelector((state) =>
     currentId ? state.sales.data.find((sale) => sale.id === currentId) : null
   );
+  const classes = useStyles();
   const dispatch = useDispatch();
   const [dataForm, setDataForm] = useState({
     name_client: "",
@@ -56,18 +58,19 @@ export default function SalesForm({
   const handleClose = () => {
     clear();
     onSalesForm();
+    setMessage(null);
   };
 
   return (
-    <Modal show={show} onHide={handleClose} size="lg">
-      <Modal.Header closeButton className="bg-dark text-light">
-        <Modal.Title>Create sale</Modal.Title>
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton className="bg-dark text-warning">
+        <Modal.Title>{currentId === 0 ? 'Create' : 'Edit'} sale</Modal.Title>
       </Modal.Header>
       <Form onSubmit={handleSubmit}>
         <Modal.Body>
           {message && (
             <Alert variant="danger" className="text-center">
-              {message}
+              <strong>{message}</strong>
             </Alert>
           )}
           <Row>
@@ -136,13 +139,18 @@ export default function SalesForm({
               </Form.Group>
             </Col>
           </Row>
+          <Row className="mt-1">
+            <strong className="text-secondary">
+              <label className="text-danger">*</label>Fields required
+            </strong>
+          </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="danger" onClick={handleClose} size="sm">
             Close
           </Button>
-          <Button type="submit" variant="warning">
-            Save
+          <Button type="submit" variant="warning" size="sm">
+            {currentId === 0 ? 'Save' : 'Update'}
           </Button>
         </Modal.Footer>
       </Form>

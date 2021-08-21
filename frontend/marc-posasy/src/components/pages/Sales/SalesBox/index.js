@@ -15,11 +15,11 @@ export default function SalesBox({ onSalesBox, setCurrentId }) {
   return (
     <>
       <Card className={`mt-2 ${classes.cardSales}`}>
-        <Card.Header className="bg-warning">
-          <strong>Ventas</strong>
+        <Card.Header className="bg-dark text-warning">
+          <strong className="title-module">Ventas</strong>
           <div className="float-end">
             <Button
-              variant="dark"
+              variant="warning"
               size="sm"
               title="Add sale"
               onClick={onSalesBox}
@@ -38,11 +38,11 @@ export default function SalesBox({ onSalesBox, setCurrentId }) {
             <>
               <Row className="mb-2">
                 <strong className="text-center">
-                  Amount sales: {sales.total}
+                  Number sales: {sales.total}
                 </strong>
               </Row>
-              <Table striped bordered hover>
-                <thead className="bg-secondary text-light text-center">
+              <Table striped hover responsive className="table-module">
+                <thead className="bg-secondary text-warning text-center">
                   <tr>
                     <th>Acciones</th>
                     <th>Cliente</th>

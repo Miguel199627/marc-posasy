@@ -11,3 +11,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.modal-title {
+  font-family: monospace;
+  font-size: 1.0rem !important;
+}
+
+.btn-close {
+  background-color: #ffc107!important;
+}
+
+.form-control {
+  padding: 0.2rem .5rem !important;
+}
+
+.form-label {
+  font-family: monospace;
+  margin-bottom: unset !important;
+  margin: 0.1rem;
+}
+
+.title-module {
+  font-family: monospace;
+  font-size: 20px;
+}
+
+.table-module {
+  font-size: 15px;
+  font-family: monospace;
+}

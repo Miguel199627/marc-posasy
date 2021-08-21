@@ -33,8 +33,8 @@ export default function PageTop() {
   return (
     <Navbar bg="dark">
         <Navbar.Brand className="text-light ms-3">
-          <FontAwesomeIcon icon={faTags} className="bi me-2" />
-          <span className="fs-4">Marcposasy</span>
+          <FontAwesomeIcon icon={faTags} className="bi me-2 text-warning" />
+          <span className={`fs-4 ${classes.titleLogo}`}>Marcposasy</span>
         </Navbar.Brand>
         <Navbar.Collapse className="justify-content-end me-3">
           <Dropdown>

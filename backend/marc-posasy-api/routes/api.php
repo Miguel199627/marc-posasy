@@ -30,4 +30,5 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('/sale/list', [SaleController::class, 'list']);
     Route::post('/sale/add', [SaleController::class, 'add']);
     Route::put('/sale/update', [SaleController::class, 'update']);
+    Route::delete('/sale/delete/{id}', [SaleController::class, 'delete']);
 });

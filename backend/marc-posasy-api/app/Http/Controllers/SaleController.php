@@ -10,7 +10,7 @@ class SaleController extends Controller
 {
 
     public function list() {
-        $list = Sale::paginate(15);
+        $list = Sale::withTrashed()->paginate(15);
         if(!$list) return response("Process failed: No sales", 400);
         return response($list, 200);
     }
@@ -36,7 +36,7 @@ class SaleController extends Controller
         $result = $sale->save();
         if(!$result) return response("Process failed: Failed to register", 400);
 
-        $list = Sale::paginate(15);
+        $list = Sale::withTrashed()->paginate(15);
         if(!$list) return response("Process failed: No sales", 400);
         
         return response($list, 200);
@@ -67,6 +67,18 @@ class SaleController extends Controller
         if(!$result) return response("Process failed: Failed to register", 400);
 
         return response($sale, 200);
+    }
+
+    public function delete($id=null) {
+        $result = Sale::find($id);
+        if(!$result) return response("Process failed: Sale isn't find", 400);
+
+        if(!$result->delete()) return response('Process failed: Failed to delete', 200);
+
+        $list = Sale::withTrashed()->paginate(15);
+        if(!$list) return response("Process failed: No sales", 400);
+        
+        return response($list, 200);
     }
     
 }
