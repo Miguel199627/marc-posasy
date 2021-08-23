@@ -40,3 +40,19 @@ code {
   font-size: 15px;
   font-family: monospace;
 }
+
+.navbar {
+  position: fixed !important;
+  width: 100%;
+  z-index: 90;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: #000000 !important;
+  background-color: #ffc107 !important;
+}
+
+.page-link {
+  color: #ffc107 !important;
+  background-color: #212529 !important;
+}

@@ -2,8 +2,12 @@ import { Button, Badge } from "react-bootstrap";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { supr } from "../../../../../actions/sale";
+import {
+  faEdit,
+  faToggleOff,
+  faToggleOn,
+} from "@fortawesome/free-solid-svg-icons";
+import { supr, rest } from "../../../../../actions/sale";
 
 export default function SalesBoxList({ sale, setCurrentId, onSalesBoxList }) {
   const dispatch = useDispatch();
@@ -27,14 +31,25 @@ export default function SalesBoxList({ sale, setCurrentId, onSalesBoxList }) {
         >
           <FontAwesomeIcon icon={faEdit} className="text-dark" />
         </Button>
-        <Button
-          variant="danger"
-          size="sm"
-          title="Delete user"
-          onClick={() => dispatch(supr(sale.id))}
-        >
-          <FontAwesomeIcon icon={faTrash} className="text-dark" />
-        </Button>
+        {!sale.deleted_at ? (
+          <Button
+            variant="warning"
+            size="sm"
+            title="Deactivate user"
+            onClick={() => dispatch(supr(sale.id))}
+          >
+            <FontAwesomeIcon icon={faToggleOn} className="text-dark" />
+          </Button>
+        ) : (
+          <Button
+            variant="danger"
+            size="sm"
+            title="Restore user"
+            onClick={() => dispatch(rest(sale.id))}
+          >
+            <FontAwesomeIcon icon={faToggleOff} className="text-dark" />
+          </Button>
+        )}
       </td>
       <td>{sale.name_client ? sale.name_client : "N/A"}</td>
       <td>{formatNumber(sale.total)}</td>

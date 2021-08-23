@@ -35,11 +35,8 @@ class SaleController extends Controller
 
         $result = $sale->save();
         if(!$result) return response("Process failed: Failed to register", 400);
-
-        $list = Sale::withTrashed()->paginate(15);
-        if(!$list) return response("Process failed: No sales", 400);
         
-        return response($list, 200);
+        return response($result, 200);
     }
 
     public function update(Request $req) {
@@ -73,12 +70,22 @@ class SaleController extends Controller
         $result = Sale::find($id);
         if(!$result) return response("Process failed: Sale isn't find", 400);
 
-        if(!$result->delete()) return response('Process failed: Failed to delete', 200);
+        $return = $result->delete();
 
-        $list = Sale::withTrashed()->paginate(15);
-        if(!$list) return response("Process failed: No sales", 400);
+        if(!$return) return response('Process failed: Failed to delete', 400);
         
-        return response($list, 200);
+        return response($return, 200);
+    }
+
+    public function restore($id=null) {
+        $result = Sale::withTrashed()->find($id);
+        if(!$result) return response("Process failed: Sale isn't find", 400);
+
+        $return = $result->restore();
+
+        if(!$return) return response('Process failed: Failed to restore', 400);
+        
+        return response($return, 200);
     }
     
 }

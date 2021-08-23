@@ -1,4 +1,3 @@
-import useStyles from "./styles";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
@@ -14,7 +13,6 @@ export default function SalesForm({
   let sale = useSelector((state) =>
     currentId ? state.sales.data.find((sale) => sale.id === currentId) : null
   );
-  const classes = useStyles();
   const dispatch = useDispatch();
   const [dataForm, setDataForm] = useState({
     name_client: "",

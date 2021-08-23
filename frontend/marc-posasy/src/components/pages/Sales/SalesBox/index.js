@@ -7,6 +7,7 @@ import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 
 import SalesBoxList from "./SalesBoxList";
+import SalesBoxPaginate from "./SalesBoxPaginate";
 
 export default function SalesBox({ onSalesBox, setCurrentId }) {
   const classes = useStyles();
@@ -14,7 +15,7 @@ export default function SalesBox({ onSalesBox, setCurrentId }) {
 
   return (
     <>
-      <Card className={`mt-2 ${classes.cardSales}`}>
+      <Card className={classes.cardSales}>
         <Card.Header className="bg-dark text-warning">
           <strong className="title-module">Ventas</strong>
           <div className="float-end">
@@ -35,34 +36,33 @@ export default function SalesBox({ onSalesBox, setCurrentId }) {
               <Spinner animation="grow" variant="warning" />
             </Row>
           ) : (
-            <>
-              <Row className="mb-2">
-                <strong className="text-center">
-                  Number sales: {sales.total}
-                </strong>
-              </Row>
-              <Table striped hover responsive className="table-module">
-                <thead className="bg-secondary text-warning text-center">
-                  <tr>
-                    <th>Acciones</th>
-                    <th>Cliente</th>
-                    <th>Total</th>
-                    <th>Costo</th>
-                    <th>Neto</th>
-                    <th>Fecha</th>
-                    <th>Creado en</th>
-                    <th>Estado</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sales.data?.map((sale) => (
-                    <SalesBoxList key={sale.id} sale={sale} setCurrentId={setCurrentId} onSalesBoxList={onSalesBox}/>
-                  ))}
-                </tbody>
-              </Table>
-            </>
+            <Table striped hover responsive className="table-module">
+              <thead className="bg-secondary text-warning text-center">
+                <tr>
+                  <th>Acciones</th>
+                  <th>Cliente</th>
+                  <th>Total</th>
+                  <th>Costo</th>
+                  <th>Neto</th>
+                  <th>Fecha</th>
+                  <th>Creado en</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sales.data?.map((sale) => (
+                  <SalesBoxList
+                    key={sale.id}
+                    sale={sale}
+                    setCurrentId={setCurrentId}
+                    onSalesBoxList={onSalesBox}
+                  />
+                ))}
+              </tbody>
+            </Table>
           )}
           <ToastContainer autoClose={2000} />
+          <SalesBoxPaginate {...sales}/>
         </Card.Body>
       </Card>
     </>

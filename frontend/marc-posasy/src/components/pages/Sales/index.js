@@ -16,7 +16,7 @@ export default function Sales() {
   const handleSalesBoxOpen = () => setShow(true);
 
   useEffect(() => {
-    dispatch(getSales());
+    dispatch(getSales(null));
   }, [currentId, dispatch]);
 
   return (
